@@ -1,9 +1,9 @@
 ---
 title: Frontmatter Reference
-description: Une vue d'ensemble des champs frontmatter par défaut pris en charge par Starlight.
+description: Une vue d'ensemble des champs du frontmatter par défaut pris en charge par Starlight.
 ---
 
-Vous pouvez personnaliser des pages Markdown et MDX individuelles dans Starlight en définissant des valeurs dans leur page de garde. Par exemple, une page normale peut définir les champs `title` et `description` :
+Vous pouvez personnaliser des pages Markdown et MDX individuelles dans Starlight en définissant des valeurs dans leur frontmatter. Par exemple, une page normale peut définir les champs `title` et `description` :
 
 ```md
 ---
@@ -14,7 +14,7 @@ description: En savoir plus sur le projet sur lequel je travaille.
 Bienvenue sur la page "à propos" !
 ```
 
-## Champs de la page d'accueil
+## Champs du frontmatter
 
 ### `title` (obligatoire)
 
@@ -32,11 +32,11 @@ La description de la page est utilisée pour les métadonnées de la page et ser
 
 **type:** `string | boolean`
 
-Remplace la [configuration globale `editLink`](/fr/reference/configuration/#editlink). Mettez `false` pour désactiver le lien "Editer la page" pour une page spécifique ou pour fournir une URL alternative où le contenu de cette page est éditable.
+Remplace la [configuration globale `editLink`](/fr/reference/configuration/#editlink). Mettez `false` pour désactiver le lien "Modifier cette page" pour une page spécifique ou pour fournir une URL alternative où le contenu de cette page est éditable.
 
 ### `head`
 
-**type:** [`HeadConfig[]`](/fr-FR/reference/configuration/#headconfig)
+**type:** [`HeadConfig[]`](/fr/reference/configuration/#headconfig)
 
 Vous pouvez ajouter des balises supplémentaires au champ `<head>` de votre page en utilisant le champ `head` frontmatter. Cela signifie que vous pouvez ajouter des styles personnalisés, des métadonnées ou d'autres balises à une seule page. Similaire à [l'option globale `head`](/fr/reference/configuration/#head).
 
@@ -56,6 +56,22 @@ head:
 
 Remplace la [configuration globale `tableOfContents`](/fr/reference/configuration/#tableofcontents).
 Personnalisez les niveaux d'en-tête à inclure ou mettez `false` pour cacher la table des matières sur cette page.
+
+```md
+---
+title: Pagee avec seulement des H2s dans la table des matières
+tableOfContents:
+  minHeadingLevel: 2
+  maxHeadingLevel: 2
+---
+```
+
+```md
+---
+title: Page sans table des matières
+tableOfContents: false
+---
+```
 
 ### `template`
 
@@ -103,7 +119,7 @@ interface HeroConfig {
   tagline?: string;
   image?: {
     alt?: string;
-    // Chemin relatif vers une image dans votre référentiel.
+    // Chemin relatif vers une image dans votre dépôt.
     file?: string;
     // HTML brut à utiliser dans l'emplacement de l'image.
     // Il peut s'agir d'une balise `<img>` personnalisée ou d'une balise `<svg>` en ligne.
@@ -116,4 +132,95 @@ interface HeroConfig {
     icon: string;
   }>;
 }
+```
+
+### `lastUpdated`
+
+**type:** `Date | boolean`
+
+Remplace la [configuration globale `lastUpdated`](/fr/reference/configuration/#lastupdated). Si une date est spécifiée, elle doit être un [horodatage YAML](https://yaml.org/type/timestamp.html) valide et remplacera la date stockée dans l'historique Git pour cette page.
+
+```md
+---
+title: Page avec une date de dernière mise à jour personnalisée
+lastUpdated: 2022-08-09
+---
+```
+
+### `prev`
+
+**type:** `boolean | string | { link?: string; label?: string }`
+
+Remplace la [configuration globale `pagination`](/fr/reference/configuration/#pagination). Si un string est spécifié, le texte du lien généré sera remplacé et si un objet est spécifié, le lien et le texte seront remplacés.
+
+```md
+---
+# Masquer le lien de la page précédente
+prev: false
+---
+```
+
+```md
+---
+# Remplacer le texte du lien de la page
+prev: Poursuivre the tutorial
+---
+```
+
+```md
+---
+# Remplacer le lien et le texte de la page
+prev:
+  link: /unrelated-page/
+  label: Consultez cette autre page
+---
+```
+
+### `next`
+
+**type:** `boolean | string | { link?: string; label?: string }`
+
+La même chose que [`prev`](#prev) mais pour le lien de la page suivante.
+
+```md
+---
+# Masquer le lien de la page suivante
+next: false
+---
+```
+
+### `sidebar`
+
+**type:** `{ label?: string; order?: number }`
+
+Contrôler l'affichage de cette page dans la [barre latérale](/fr/reference/configuration/#sidebar), lors de l'utilisation d'un groupe de liens généré automatiquement.
+
+#### `label`
+
+**type:** `string`  
+**default:** the page [`title`](#title-required)
+
+Définir l'étiquette de cette page dans la barre latérale lorsqu'elle est affichée dans un groupe de liens généré automatiquement.
+
+```md
+---
+title: About this project
+sidebar:
+  label: About
+---
+```
+
+#### `order`
+
+**type:** `number`
+
+Contrôler l'ordre de cette page lors du tri d'un groupe de liens généré automatiquement.
+Les numéros inférieurs sont affichés plus haut dans le groupe de liens.
+
+```md
+---
+title: Page à afficher en premier
+sidebar:
+  order: 1
+---
 ```

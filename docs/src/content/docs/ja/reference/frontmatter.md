@@ -56,6 +56,22 @@ head:
 
 [グローバルの`tableOfContents`設定](/ja/reference/configuration/#tableofcontents)を上書きします。表示したい見出しのレベルをカスタマイズするか、あるいは`false`に設定して目次を非表示とします。
 
+```md
+---
+title: 目次にH2のみを表示するページ
+tableOfContents:
+  minHeadingLevel: 2
+  maxHeadingLevel: 2
+---
+```
+
+```md
+---
+title: 目次のないページ
+tableOfContents: false
+---
+```
+
 ### `template`
 
 **type:** `'doc' | 'splash'`  
@@ -113,4 +129,94 @@ interface HeroConfig {
     icon: string;
   }>;
 }
+```
+
+### `lastUpdated`
+
+**type:** `Date | boolean`
+
+[グローバルの`lastUpdated`オプション](/ja/reference/configuration/#lastupdated)を上書きします。日付を指定する場合は有効な[YAMLタイムスタンプ](https://yaml.org/type/timestamp.html)である必要があり、ページのGit履歴に保存されている日付を上書きします。
+
+```md
+---
+title: 最終更新日をカスタマイズしたページ
+lastUpdated: 2022-08-09
+---
+```
+
+### `prev`
+
+**type:** `boolean | string | { link?: string; label?: string }`
+
+[グローバルの`pagination`オプション](/ja/reference/configuration/#pagination)を上書きします。文字列を指定すると生成されるリンクテキストが置き換えられ、オブジェクトを指定するとリンクとテキストの両方を上書きできます。
+
+```md
+---
+# 前のページへのリンクを非表示にする
+prev: false
+---
+```
+
+```md
+---
+# 前のページへのリンクテキストを上書きする
+prev: チュートリアルを続ける
+---
+```
+
+```md
+---
+# 前のページへのリンクとテキストを上書きする
+prev:
+  link: /unrelated-page/
+  label: その他のページをチェックする
+---
+```
+
+### `next`
+
+**type:** `boolean | string | { link?: string; label?: string }`
+
+次のページへのリンクに対して、[`prev`](#prev)と同様の設定ができます。
+
+```md
+---
+# 次のページへのリンクを非表示にする
+next: false
+---
+```
+
+### `sidebar`
+
+**type:** `{ label?: string; order?: number }`
+
+自動生成されるリンクのグループを使用している際に、[サイドバー](/ja/reference/configuration/#sidebar)にページをどのように表示するかを設定します。
+
+#### `label`
+
+**type:** `string`  
+**default:** ページの[`title`](#title必須)
+
+自動生成されるリンクのグループ内に表示される、ページのサイドバー上でのラベルを設定します。
+
+```md
+---
+title: このプロジェクトについて
+sidebar:
+  label: 概要
+---
+```
+
+#### `order`
+
+**type:** `number`
+
+自動生成されるリンクのグループをソートする際の、このページの順番を設定します。小さな数値ほどリンクグループの上部に表示されます。
+
+```md
+---
+title: 最初に表示するページ
+sidebar:
+  order: 1
+---
 ```

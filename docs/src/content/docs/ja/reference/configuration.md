@@ -43,7 +43,7 @@ export default defineConfig({
 ```js
 starlight({
   logo: {
-    src: '/src/assets/my-logo.svg',
+    src: './src/assets/my-logo.svg',
   },
 });
 ```
@@ -82,17 +82,23 @@ starlight({
 
 ### `sidebar`
 
-**type:** [`SidebarGroup[]`](#sidebargroup)
+**type:** [`SidebarItem[]`](#sidebaritem)
 
 サイトのサイドバーのナビゲーション項目を設定します。
 
-サイドバーはグループごとに`label`をもつ配列で、`items`配列または`autogenerate`設定オブジェクトのいずれかを含みます。
+サイドバーはリンクとリンクのグループの配列です。各項目は、`label`と以下のプロパティのいずれかが必要です。
 
-リンクとサブグループを含む配列である`items`により、グループの内容を手動で設定できます。また、`autogenerate`を使用して、ドキュメントの特定のディレクトリからグループの内容を自動的に生成することも可能です。
+- `link` — 特定のURL、たとえば`'/home'`や`'https://example.com'`などへの単一のリンク。
+
+- `items` — サイドバーの複数のリンクとサブグループを含む配列。
+
+- `autogenerate` — リンクのグループを自動的に生成するために、ドキュメントのディレクトリを指定するオブジェクト。
 
 ```js
 starlight({
   sidebar: [
+    // 「ホーム」というラベルのついた単一のリンク。
+    { label: 'ホーム', link: '/' },
     // 2つのリンクを含む、「ここから始める」というラベルのついたグループ。
     {
       label: 'ここから始める',
@@ -101,7 +107,7 @@ starlight({
         { label: '次のステップ', link: '/next-steps' },
       ],
     },
-    // 参照先のディレクトリのすべてのページにリンクするグループ。
+    // referenceディレクトリのすべてのページにリンクするグループ。
     {
       label: 'リファレンス',
       autogenerate: { directory: 'reference' },
@@ -114,13 +120,41 @@ starlight({
 
 自動生成されたサイドバーグループは、ファイル名のアルファベット順に並べ替えられます。たとえば、`astro.md`から生成されたページは、`starlight.md`というページの上に表示されます。
 
+#### グループの折りたたみ
+
+リンクのグループはデフォルトで展開されます。`collapsed`プロパティを`true`に設定して、この動作を変更できます。
+
+自動生成されたサブグループは、デフォルトでは親グループの`collapsed`プロパティに従います。`autogenerate.collapsed`プロパティを設定して、これを上書きできます。
+
+```js
+sidebar: [
+  // 折りたたまれたリンクのグループ。
+  {
+    label: '折りたたまれたリンク',
+    collapsed: true,
+    items: [
+      { label: 'はじめに', link: '/intro' },
+      { label: '次のステップ', link: '/next-steps' },
+    ],
+  },
+  // 自動生成される折りたたまれたサブグループを含む展開されたグループ。
+  {
+    label: '参照',
+    autogenerate: {
+      directory: 'reference',
+      collapsed: true,
+    },
+  },
+],
+```
+
 #### ラベルの翻訳
 
 多言語対応が必要なサイトの場合、各項目の`label`はデフォルトのロケールのものとみなされます。サポート対象の言語のラベルを提供するには、`translations`プロパティを設定します。
 
 ```js
 sidebar: [
-  // An example sidebar with labels translated to French. フランス語に翻訳されたラベルをもつサイドバーの例。
+  // フランス語に翻訳されたラベルをもつサイドバーの例。
   {
     label: 'ここから始める',
     translations: { fr: 'Commencez ici' },
@@ -137,41 +171,30 @@ sidebar: [
       },
     ],
   },
-];
+],
 ```
 
-#### `SidebarGroup`
+#### `SidebarItem`
 
 ```ts
-type SidebarGroup =
-  | {
-      label: string;
-      translations?: Record<string, string>;
-      items: Array<LinkItem | SidebarGroup>;
-    }
-  | {
-      label: string;
-      translations?: Record<string, string>;
-      autogenerate: {
-        directory: string;
-      };
-    };
-```
-
-#### `LinkItem`
-
-```ts
-interface LinkItem {
+type SidebarItem = {
   label: string;
-  link: string;
-}
+  translations?: Record<string, string>;
+} & (
+  | { link: string }
+  | { items: SidebarItem[]; collapsed?: boolean }
+  | {
+      autogenerate: { directory: string; collapsed?: boolean };
+      collapsed?: boolean;
+    }
+);
 ```
 
 ### `locales`
 
-**type:** `{ [dir: string]: LocaleConfig }`
+**type:** <code>{ \[dir: string\]: [LocaleConfig](#localeconfig) }</code>
 
-サイトの国際化（i18n）をおこなうには、サポート対象の`locales`を設定します。
+[サイトの国際化（i18n）をおこなうには](/ja/guides/i18n/)、サポート対象の`locales`を設定します。
 
 各エントリは、その言語のファイルが保存されているディレクトリ名をキーとして使用する必要があります。
 
@@ -207,7 +230,15 @@ export default defineConfig({
 });
 ```
 
-#### ロケールオプション
+#### `LocaleConfig`
+
+```ts
+interface LocaleConfig {
+  label: string;
+  lang?: string;
+  dir?: 'ltr' | 'rtl';
+}
+```
 
 各ロケールに対し以下のオプションを設定できます。
 
@@ -253,23 +284,29 @@ starlight({
 
 **type:** `string`
 
-このサイトのデフォルト言語を設定します。この値は、[`locales`](#locales)オブジェクトのキーのいずれかと一致する必要があります。（デフォルト言語が[ルートロケール](#root-locale)の場合は、この設定をスキップできます。）
+このサイトのデフォルト言語を設定します。この値は、[`locales`](#locales)オブジェクトのキーのいずれかと一致する必要があります。（デフォルト言語が[ルートロケール](#ルートロケール)の場合は、この設定をスキップできます。）
 
 翻訳がない場合には、デフォルトロケールがフォールバックコンテンツとして使用されます。
 
 ### `social`
 
-**type:** `{ discord?: string; github?: string; mastodon?: string; twitter?: string }`
+**type:** `Partial<Record<'bitbucket' | 'codeberg' | 'codePen' | 'discord' | 'github' | 'gitlab' | 'gitter' | 'linkedin' | 'mastodon' | 'microsoftTeams' | 'threads' | 'twitch' | 'twitter' | 'youtube', string>>`
 
 このサイトのソーシャルメディアアカウントに関する任意の項目です。これらのいずれかを追加すると、サイトヘッダーにアイコンリンクとして表示されます。
 
 ```js
 starlight({
   social: {
+    codeberg: 'https://codeberg.org/knut/examples',
     discord: 'https://astro.build/chat',
     github: 'https://github.com/withastro/starlight',
+    gitlab: 'https://gitlab.com/delucis',
+    linkedin: 'https://www.linkedin.com/company/astroinc',
     mastodon: 'https://m.webtoo.ls/@astro',
+    threads: 'https://www.threads.net/@nmoodev',
+    twitch: 'https://www.twitch.tv/bholmesdev',
     twitter: 'https://twitter.com/astrodotbuild',
+    youtube: 'https://youtube.com/@astrodotbuild',
   },
 });
 ```
@@ -280,11 +317,11 @@ starlight({
 
 Starlightサイトの見た目をカスタマイズするためのCSSファイルを設定します。
 
-プロジェクトのルートからの相対パスで指定したローカルのCSSファイル（`'/src/custom.css'`など）と、npmモジュールとしてインストールしたCSS（`'@fontsource/roboto'`など）に対応しています。
+プロジェクトのルートからの相対パスで指定したローカルのCSSファイル（`'./src/custom.css'`など）と、npmモジュールとしてインストールしたCSS（`'@fontsource/roboto'`など）に対応しています。
 
 ```js
 starlight({
-  customCss: ['/src/custom-styles.css', '@fontsource/roboto'],
+  customCss: ['./src/custom-styles.css', '@fontsource/roboto'],
 });
 ```
 
@@ -318,4 +355,54 @@ interface HeadConfig {
   attrs?: Record<string, string | boolean | undefined>;
   content?: string;
 }
+```
+
+### `lastUpdated`
+
+**type:** `boolean`  
+**default:** `false`
+
+フッターにページの最終更新日を表示するかどうかを制御します。
+
+デフォルトでは、この機能はリポジトリのGit履歴に依存しており、[浅いクローン](https://git-scm.com/docs/git-clone/ja#git-clone---depthltdepthgt)を実行する一部のデプロイプラットフォームでは正確にならない場合があります。[フロントマターの`lastUpdated`フィールド](/ja/reference/frontmatter/#lastupdated)を使用して、各ページでこの設定またはGitを基準とした日付を上書きできます。
+
+### `pagination`
+
+**type:** `boolean`  
+**default:** `true`
+
+フッターに前のページと次のページへのリンクを含めるかどうかを定義します。
+
+[`prev`](/ja/reference/frontmatter/#prev)と[`next`](/ja/reference/frontmatter/#next)フロントマターフィールドを使用して、この設定、またはリンクテキストとURLをページごとに上書きできます。
+
+### `favicon`
+
+**type:** `string`  
+**default:** `'/favicon.svg'`
+
+サイトのデフォルトファビコンのパスを設定します。ファビコンは`public/`ディレクトリに配置され、また有効なアイコンファイル（`.ico`、`.gif`、`.jpg`、`.png`、または`.svg`）である必要があります。
+
+```js
+starlight({
+  favicon: '/images/favicon.svg',
+}),
+```
+
+追加のバリアントやフォールバック用のファビコンを設定する必要がある場合は、[`head`オプション](#head)を使用してタグを追加できます。
+
+```js
+starlight({
+  favicon: '/images/favicon.svg'.
+  head: [
+    // Safari用にICOファビコンのフォールバックを追加します。
+    {
+      tag: 'link',
+      attrs: {
+        rel: 'icon',
+        href:'/images/favicon.ico',
+        sizes: '32x32',
+      },
+    },
+  ],
+});
 ```
