@@ -1,5 +1,114 @@
 # @astrojs/starlight
 
+## 0.10.3
+
+### Patch Changes
+
+- [#783](https://github.com/withastro/starlight/pull/783) [`f94727e`](https://github.com/withastro/starlight/commit/f94727e7d286a6910f913a572b27eb17c42f1729) Thanks [@kevinzunigacuellar](https://github.com/kevinzunigacuellar)! - Fix GitHub edit link to include src path from project config
+
+- [#781](https://github.com/withastro/starlight/pull/781) [`a293ef9`](https://github.com/withastro/starlight/commit/a293ef9ebb10a07db456156d8bdacc4ff6a2ca38) Thanks [@dreyfus92](https://github.com/dreyfus92)! - Removed role from Banner component to avoid duplication in header.
+
+- [#745](https://github.com/withastro/starlight/pull/745) [`006d606`](https://github.com/withastro/starlight/commit/006d60695761ec10e5c4e715ed2212cd1fbedda0) Thanks [@TheOtterlord](https://github.com/TheOtterlord)! - Prevent Starlight crashing when the content folder doesn't exist, or is empty
+
+- [#775](https://github.com/withastro/starlight/pull/775) [`2ef3036`](https://github.com/withastro/starlight/commit/2ef303649a0b66a6ec6a216815e05d41bf22b594) Thanks [@delucis](https://github.com/delucis)! - Fix content collection schema compatibility with Astro 3.1 and higher
+
+- [#773](https://github.com/withastro/starlight/pull/773) [`423d575`](https://github.com/withastro/starlight/commit/423d575cc8227e4db86a85c70c45c0f3f7a184d2) Thanks [@tlandmangh](https://github.com/tlandmangh)! - Fix Dutch UI translation for “Previous page” links
+
+## 0.10.2
+
+### Patch Changes
+
+- [#735](https://github.com/withastro/starlight/pull/735) [`2da8692`](https://github.com/withastro/starlight/commit/2da86929c8041f6585790c3baf1cba42220650cc) Thanks [@delucis](https://github.com/delucis)! - Use Starlight font custom property in Pagefind modal
+
+- [#735](https://github.com/withastro/starlight/pull/735) [`2da8692`](https://github.com/withastro/starlight/commit/2da86929c8041f6585790c3baf1cba42220650cc) Thanks [@delucis](https://github.com/delucis)! - Fix RTL styling in Pagefind modal
+
+- [#739](https://github.com/withastro/starlight/pull/739) [`a9de4a7`](https://github.com/withastro/starlight/commit/a9de4a7dcf9ec8c5c801e8a6cbb0d7faf2c34db7) Thanks [@radenpioneer](https://github.com/radenpioneer)! - Add Indonesian UI translation
+
+- [#747](https://github.com/withastro/starlight/pull/747) [`7589515`](https://github.com/withastro/starlight/commit/75895154b11cf9368d4d6b45647b156ce32a88f0) Thanks [@nirtamir2](https://github.com/nirtamir2)! - Add Hebrew UI translations
+
+## 0.10.1
+
+### Patch Changes
+
+- [#726](https://github.com/withastro/starlight/pull/726) [`f3157c6`](https://github.com/withastro/starlight/commit/f3157c6065943af39995b6dbae5f63cf424bd9a3) Thanks [@delucis](https://github.com/delucis)! - Fix a rare bug in table of contents when handling headings that increase by more than one level on a page.
+
+- [#729](https://github.com/withastro/starlight/pull/729) [`80c6ab1`](https://github.com/withastro/starlight/commit/80c6ab1c1ec48805e74c53b615a78d65127eeacb) Thanks [@delucis](https://github.com/delucis)! - Upgrade Pagefind to v1.0.3
+
+- [#715](https://github.com/withastro/starlight/pull/715) [`e726155`](https://github.com/withastro/starlight/commit/e7261559f2539a0ceefd36a28e4fbbc17f5970b8) Thanks [@itsmatteomanf](https://github.com/itsmatteomanf)! - feat: prevent scroll on body when search is open
+
+## 0.10.0
+
+### Minor Changes
+
+- [#692](https://github.com/withastro/starlight/pull/692) [`2a58e1a`](https://github.com/withastro/starlight/commit/2a58e1aa068d01833a0ab9e74e4b46cccaee1775) Thanks [@delucis](https://github.com/delucis)! - Upgrade Pagefind to v1 and display page headings in search results
+
+### Patch Changes
+
+- [#708](https://github.com/withastro/starlight/pull/708) [`136cfb1`](https://github.com/withastro/starlight/commit/136cfb180f22db116cfdb62fd93d21daff596946) Thanks [@julien-deramond](https://github.com/julien-deramond)! - Fix main content column width for pages without a table of contents
+
+- [#682](https://github.com/withastro/starlight/pull/682) [`660a5f5`](https://github.com/withastro/starlight/commit/660a5f57adf0340de21df3e364aada38255bb06c) Thanks [@vedmalex](https://github.com/vedmalex)! - Add Russian language support
+
+## 0.9.1
+
+### Patch Changes
+
+- [#647](https://github.com/withastro/starlight/pull/647) [`ea57726`](https://github.com/withastro/starlight/commit/ea5772655274a3900310cb700836fdd2f6dba7cd) Thanks [@bgmort](https://github.com/bgmort)! - Fix translated 404 pages not being excluded from search results
+
+- [#667](https://github.com/withastro/starlight/pull/667) [`9828f73`](https://github.com/withastro/starlight/commit/9828f739b73e2f377c1450b9e11f0914722ee440) Thanks [@delucis](https://github.com/delucis)! - Break inline `<code>` across lines to avoid overflow
+
+- [#642](https://github.com/withastro/starlight/pull/642) [`e623d92`](https://github.com/withastro/starlight/commit/e623d92c2fddc0ff5fe83d2554266885d683a906) Thanks [@fk](https://github.com/fk)! - Don't hard-code nav height in table of contents highlighting script
+
+- [#676](https://github.com/withastro/starlight/pull/676) [`6419006`](https://github.com/withastro/starlight/commit/641900615aa9a9a128d6934e65a57ba89e503cfd) Thanks [@vedmalex](https://github.com/vedmalex)! - Upgrade and pin Pagefind to latest beta release.
+
+- [#647](https://github.com/withastro/starlight/pull/647) [`ea57726`](https://github.com/withastro/starlight/commit/ea5772655274a3900310cb700836fdd2f6dba7cd) Thanks [@bgmort](https://github.com/bgmort)! - Add frontmatter option to exclude a page from Pagefind search results
+
+## 0.9.0
+
+### Minor Changes
+
+- [#626](https://github.com/withastro/starlight/pull/626) [`5dd22b8`](https://github.com/withastro/starlight/commit/5dd22b875dc19a32c48692082fbd934e2b70da63) Thanks [@delucis](https://github.com/delucis)! - Throw an error for duplicate MDX or sitemap integrations
+
+- [#615](https://github.com/withastro/starlight/pull/615) [`7b75b3e`](https://github.com/withastro/starlight/commit/7b75b3eb7e6f7870a0adef2d6534ff48309fdb0e) Thanks [@delucis](https://github.com/delucis)! - Bump minimum required Astro version to 3.0
+
+  ⚠️ **BREAKING CHANGE** Astro v2 is no longer supported. Make sure you [update Astro](https://docs.astro.build/en/guides/upgrade-to/v3/) and any other integrations at the same time as updating Starlight.
+
+## 0.8.1
+
+### Patch Changes
+
+- [#612](https://github.com/withastro/starlight/pull/612) [`1b367e3`](https://github.com/withastro/starlight/commit/1b367e3f65e3736b5f91c9853a487f7f5d174a6f) Thanks [@KubaJastrz](https://github.com/KubaJastrz)! - Avoid applying hovered `<select>` text color to its `<options>`
+
+## 0.8.0
+
+### Minor Changes
+
+- [#529](https://github.com/withastro/starlight/pull/529) [`c2d0e7f`](https://github.com/withastro/starlight/commit/c2d0e7f2699e60a48a3a9074eee6439dee8624a1) Thanks [@delucis](https://github.com/delucis)! - For improved compatibility with Tailwind, some Starlight built-in class names are now prefixed with `"sl-"`.
+
+  While not likely, if you were relying on one of these internal class names in your own components or custom CSS, you will need to update to use the prefixed version.
+
+  - **Before:** `flex`, `md:flex`, `lg:flex`, `block`, `md:block`, `lg:block`, `hidden`, `md:hidden`, `lg:hidden`.
+  - **After:** `sl-flex`, `md:sl-flex`, `lg:sl-flex`, `sl-block`, `md:sl-block`, `lg:sl-block`, `sl-hidden`, `md:sl-hidden`, `lg:sl-hidden`.
+
+- [#593](https://github.com/withastro/starlight/pull/593) [`5b8af95`](https://github.com/withastro/starlight/commit/5b8af95049781954eabc3895027218b3de8ff054) Thanks [@delucis](https://github.com/delucis)! - Add announcement banner feature
+
+- [#516](https://github.com/withastro/starlight/pull/516) [`70a32a1`](https://github.com/withastro/starlight/commit/70a32a1736c776febb34cf0ca3014f375ff9fec8) Thanks [@kevinzunigacuellar](https://github.com/kevinzunigacuellar)! - Support adding badges to sidebar links from config file and frontmatter
+
+### Patch Changes
+
+- [#569](https://github.com/withastro/starlight/pull/569) [`a7691f8`](https://github.com/withastro/starlight/commit/a7691f82fdabb1c4e6b14bcfa8289aaceb929997) Thanks [@HiDeoo](https://github.com/HiDeoo)! - Use locale when sorting autogenerated sidebar entries
+
+- [#559](https://github.com/withastro/starlight/pull/559) [`5726353`](https://github.com/withastro/starlight/commit/5726353f1a4815df9ab5a7acd7aea6af53383adc) Thanks [@delucis](https://github.com/delucis)! - Add Stack Overflow icon
+
+## 0.7.3
+
+### Patch Changes
+
+- [#525](https://github.com/withastro/starlight/pull/525) [`87caf21`](https://github.com/withastro/starlight/commit/87caf21adaac98cf8342dac4db97ace327849616) Thanks [@delucis](https://github.com/delucis)! - Improve inline code and code block support in RTL languages
+
+- [#537](https://github.com/withastro/starlight/pull/537) [`56c19bc`](https://github.com/withastro/starlight/commit/56c19bc871f2a4f205d4b0bb833fd81a3ed2e0f0) Thanks [@carlgleisner](https://github.com/carlgleisner)! - Add Swedish UI translations.
+
+- [#528](https://github.com/withastro/starlight/pull/528) [`f5e5503`](https://github.com/withastro/starlight/commit/f5e55036987db98dbd0be7a84eb7819a48234a2f) Thanks [@jsparkdev](https://github.com/jsparkdev)! - add Korean language support
+
 ## 0.7.2
 
 ### Patch Changes
