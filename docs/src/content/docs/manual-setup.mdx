@@ -44,7 +44,7 @@ The Starlight integration is configured in your `astro.config.mjs` file.
 
 Add a `title` to get started:
 
-```js {7-9}
+```js ins={8}
 // astro.config.mjs
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
@@ -106,7 +106,7 @@ To add all Starlight pages at a subpath, place all your docs content inside a su
 
 For example, if Starlight pages should all start with `/guides/`, add your content in the `src/content/docs/guides/` directory:
 
-import FileTree from '../../components/file-tree.astro';
+import FileTree from '~/components/file-tree.astro';
 
 <FileTree>
 
