@@ -118,6 +118,8 @@ hero:
     - text: 在 GitHub 上查看
       link: https://github.com/astronaut/my-project
       icon: external
+      attrs:
+        rel: me
 ---
 ```
 
@@ -165,6 +167,7 @@ interface HeroConfig {
     link: string;
     variant: 'primary' | 'secondary' | 'minimal';
     icon: string;
+    attrs?: Record<string, string | number | boolean>;
   }>;
 }
 ```
@@ -303,7 +306,7 @@ sidebar:
 **类型：** `number`
 
 当对链接组进行自动生成排序时，控制此页面的顺序。
-数字越小，链接组中显示的越高。
+数字越小，链接组中显示得越高。
 
 ```md
 ---

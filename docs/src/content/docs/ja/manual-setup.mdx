@@ -103,7 +103,7 @@ Starlightのすべてのページをサブパスに追加するには、ドキ�
 
 たとえば、Starlightのページがすべて`/guides/`で始まる場合は、コンテンツを`src/content/docs/guides/`ディレクトリに追加します。
 
-import FileTree from '~/components/file-tree.astro';
+import { FileTree } from '@astrojs/starlight/components';
 
 <FileTree>
 
@@ -122,4 +122,6 @@ import FileTree from '~/components/file-tree.astro';
 
 ### StarlightとSSR
 
-現在、StarlightはAstroのサーバーアダプタを使用した[SSRデプロイ](https://docs.astro.build/ja/guides/server-side-rendering/)をサポートしていません。近いうちにサポートできるようにしたいと考えています。
+Astroドキュメントの「[オンデマンドレンダリングアダプタ](https://docs.astro.build/ja/guides/server-side-rendering/)」ガイドに従うことで、Starlightをカスタムのオンデマンドレンダリングページと併用できます。
+
+現在、Starlightによって生成されるドキュメントページは、プロジェクトの出力モードに関係なく常にプリレンダリングされます。近い内にStarlightページのオンデマンドレンダリングをサポートしたいと考えています。

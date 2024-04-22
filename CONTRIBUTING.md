@@ -214,14 +214,14 @@ Visit **<https://i18n.starlight.astro.build>** to track translation progress for
 
 #### Adding a new language to Starlight’s docs
 
-To add a language, you will need its BCP-47 tag and a label. See [“Adding a new language”](https://github.com/withastro/docs/blob/main/contributor-guides/translating-astro-docs.md#adding-a-new-language) in the Astro docs repo for some helpful tips around choosing these.
+To add a language, you will need its BCP-47 tag and a label. See [“Adding a new language”](https://contribute.docs.astro.build/guides/i18n/#adding-a-new-language) in the Astro docs repo for some helpful tips around choosing these.
 
 - Add your language to the `locales` config in `docs/astro.config.mjs`
 - Add your language to the `locales` config in `docs/lunaria.config.json`
 - Add your language’s subtag to the i18n label config in `.github/labeler.yml`
 - Add your language to the `pa11y` script’s `--sitemap-exclude` flag in `package.json`
-- Create the first translated page for your language.  
-   This must be the Starlight landing page: `docs/src/content/docs/{language}/index.mdx`.
+- Create the first translated page for your language.
+  This must be the Starlight landing page: `docs/src/content/docs/{language}/index.mdx`.
 - Open a pull request on GitHub to add your changes to Starlight!
 
 ## Understanding Starlight
@@ -254,3 +254,28 @@ To add a language, you will need its BCP-47 tag and a label. See [“Adding a ne
 [gfi]: https://github.com/withastro/starlight/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22+
 [api-docs]: https://docs.astro.build/en/reference/integrations-reference/
 [vitest]: https://vitest.dev/
+
+## Showcase
+
+We love to see websites built with Starlight and share them with the community on our [showcase](https://starlight.astro.build/resources/showcase/) page.
+If you’ve built a documentation site with Starlight, adding it to the showcase is just a pull request away!
+
+1. Set up a development environment by following the [“Setting up a development environment”](#setting-up-a-development-environment) instructions.
+2. Add a screenshot of your site to the `docs/src/assets/showcase/` directory. The image file must:
+   - Be a `.png` file and named after your site’s domain, e.g. `example.com.png`.
+   - Have the dimensions of 800 × 450 pixels.
+3. Add a new entry for your website in `docs/src/components/showcase-sites.astro`.
+
+   - The new entry must be appended at the end of the existing list of sites.
+   - The `title` attribute must be the name of your site with no extra details.
+   - The `href` attribute must be the URL of your Starlight site. If your documentation is hosted on a subdomain or subdirectory, include that in the URL.
+   - The `thumbnail` attribute must be the filename of the screenshot you added in step 2.
+
+   ```diff
+     <Card title="Example" href="https://example.net" thumbnail="example.net.png" />
+     <Card title="Last Example" href="https://example.org" thumbnail="example.org.png" />
+   + <Card title="New Example" href="https://example.com" thumbnail="example.com.png" />
+   </FluidGrid>
+   ```
+
+4. Open a pull request on GitHub to add your changes.

@@ -106,6 +106,35 @@ Nested tip.
 	expect(res.code).toMatchFileSnapshot('./snapshots/nested-asides.html');
 });
 
+test('nested asides with custom titles', async () => {
+	const res = await processor.render(`
+:::::caution[Caution with a custom title]
+Nested caution.
+
+::::note
+Nested note.
+
+:::tip[Tip with a custom title]
+Nested tip.
+:::
+
+::::
+
+:::::
+`);
+	const labels = [...res.code.matchAll(/aria-label="(?<label>[^"]+)"/g)].map(
+		(match) => match.groups?.label
+	);
+	expect(labels).toMatchInlineSnapshot(`
+		[
+		  "Caution with a custom title",
+		  "Note",
+		  "Tip with a custom title",
+		]
+	`);
+	expect(res.code).toMatchFileSnapshot('./snapshots/nested-asides-custom-titles.html');
+});
+
 describe('translated labels in French', () => {
 	test.each([
 		['note', 'Note'],
@@ -142,4 +171,23 @@ test('runs without locales config', async () => {
 	});
 	const res = await processor.render(':::note\nTest\n::');
 	expect(res.code.includes('aria-label=Note"'));
+});
+
+test('tranforms back unhandled text directives', async () => {
+	const res = await processor.render(
+		`This is a:test of a sentence with a text:name[content]{key=val} directive.`
+	);
+	expect(res.code).toMatchInlineSnapshot(`
+		"<p>This is a:test
+		 of a sentence with a text:name[content]{key="val"}
+		 directive.</p>"
+	`);
+});
+
+test('tranforms back unhandled leaf directives', async () => {
+	const res = await processor.render(`::video[Title]{v=xxxxxxxxxxx}`);
+	expect(res.code).toMatchInlineSnapshot(`
+		"<p>::video[Title]{v="xxxxxxxxxxx"}
+		</p>"
+	`);
 });

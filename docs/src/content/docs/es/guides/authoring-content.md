@@ -164,7 +164,7 @@ Tus usuarios pueden ser más productivos y encontrar más fácil de usar tu prod
 
 - Navegación clara
 - Tema de color configurable por el usuario
-- [Soporte de i18n](/es/guides/i18n)
+- [Soporte de i18n](/es/guides/i18n/)
 
 :::
 
@@ -178,7 +178,7 @@ Tus usuarios pueden ser más productivos y encontrar más fácil de usar tu prod
 
 - Navegación clara
 - Tema de color configurable por el usuario
-- [Soporte de i18n](/es/guides/i18n)
+- [Soporte de i18n](/es/guides/i18n/)
 
 :::
 ```
@@ -298,7 +298,7 @@ Algunos de los ejemplos más comunes se muestran a continuación:
     function thisIsJavaScript() {
       // ¡El bloque completo se resalta como JavaScript,
       // y aún podemos añadir marcadores de diferencias a él!
-  -   console.log('Código antiguo a eliminar'')
+  -   console.log('Código antiguo a eliminar')
   +   console.log('¡Nuevo y brillante código!')
     }
   ```
@@ -308,8 +308,8 @@ Algunos de los ejemplos más comunes se muestran a continuación:
     function thisIsJavaScript() {
       // ¡El bloque completo se resalta como JavaScript,
       // y aún podemos añadir marcadores de diferencias a él!
-  -   console.log('Old code to be removed')
-  +   console.log('New and shiny code!')
+  -   console.log('Código antiguo a eliminar')
+  +   console.log('¡Nuevo y brillante código!')
     }
   ```
   ````

@@ -5,7 +5,7 @@ tableOfContents:
   maxHeadingLevel: 4
 ---
 
-Puoi sovrascrivere i componenti integrati di Starlight fornendo percorsi ai componenti sostitutivi nell'opzione di configurazione [`components`](/it/reference/configuration#components) di Starlight.
+Puoi sovrascrivere i componenti integrati di Starlight fornendo percorsi ai componenti sostitutivi nell'opzione di configurazione [`components`](/it/reference/configuration/#components) di Starlight.
 Questa pagina elenca tutti i componenti disponibili per l'override e si collega alle loro implementazioni predefinite su GitHub.
 
 Scopri di più nella [Guida alla sostituzione dei componenti](/it/guides/overriding-components/).
@@ -18,6 +18,7 @@ Per aggiungere i tipi di dato ai tuoi componenti personalizzati, importa il tipo
 
 ```astro
 ---
+// src/components/Custom.astro
 import type { Props } from '@astrojs/starlight/props';
 
 const { hasSidebar } = Astro.props;
@@ -33,44 +34,44 @@ Starlight trasmetterà le seguenti proprietà ai tuoi componenti personalizzati.
 
 #### `dir`
 
-**Tipo:** `'ltr' | 'rtl'`
+**tipo:** `'ltr' | 'rtl'`
 
 Direzione di scrittura della pagina.
 
 #### `lang`
 
-**Tipo:** `string`
+**tipo:** `string`
 
 Tag di lingua BCP-47 per le impostazioni internazionali di questa pagina, ad es. `en`, `zh-CN` o `pt-BR`.
 
 #### `locale`
 
-**Tipo:** `string | undefined`
+**tipo:** `string | undefined`
 
 Il percorso di base in cui viene servita una lingua. `undefined` per gli slug della lingua di base.
 
 #### `slug`
 
-**Tipo:** `string`
+**tipo:** `string`
 
 Lo slug per questa pagina generato dal nome del file di contenuto.
 
 #### `id`
 
-**Tipo:** `string`
+**tipo:** `string`
 
 L'ID univoco per questa pagina in base al nome del file di contenuto.
 
 #### `isFallback`
 
-**Tipo:** `true | undefined`
+**tipo:** `true | undefined`
 
 `true` se questa pagina non è tradotta nella lingua corrente e utilizza contenuti di riserva dalle impostazioni di lingua predefinite.
 Utilizzato solo in siti multilingue.
 
 #### `entryMeta`
 
-**Tipo:** `{ dir: 'ltr' | 'rtl'; lang: string }`
+**tipo:** `{ dir: 'ltr' | 'rtl'; lang: string }`
 
 Metadati di lingua per il contenuto della pagina. Può essere diverso dai valori di lingua di livello superiore quando una pagina utilizza contenuti di fallback.
 
@@ -93,46 +94,52 @@ Scopri di più sulla forma di questo oggetto nel riferimento [Tipo di voce della
 
 #### `sidebar`
 
-**Tipo:** `SidebarEntry[]`
+**tipo:** `SidebarEntry[]`
 
 Voci della barra laterale di navigazione del sito per questa pagina.
 
 #### `hasSidebar`
 
-**Tipo:** `boolean`
+**tipo:** `boolean`
 
 Se la barra laterale deve essere visualizzata o meno in questa pagina.
 
 #### `pagination`
 
-**Tipo:** `{ prev?: Link; next?: Link }`
+**tipo:** `{ prev?: Link; next?: Link }`
 
 Collegamenti alla pagina precedente e successiva nella barra laterale, se abilitata.
 
 #### `toc`
 
-**Tipo:** `{ minHeadingLevel: number; maxHeadingLevel: number; items: TocItem[] } | undefined`
+**tipo:** `{ minHeadingLevel: number; maxHeadingLevel: number; items: TocItem[] } | undefined`
 
 Sommario per questa pagina se abilitato.
 
 #### `headings`
 
-**Tipo:** `{ depth: number; slug: string; text: string }[]`
+**tipo:** `{ depth: number; slug: string; text: string }[]`
 
 Matrice di tutte le intestazioni Markdown estratte dalla pagina corrente.
 Utilizza invece [`toc`](#toc) se vuoi creare un sommario che rispetti le opzioni di configurazione di Starlight.
 
 #### `lastUpdated`
 
-**Tipo:** `Date | undefined`
+**tipo:** `Date | undefined`
 
 Oggetto JavaScript `Date` che rappresenta l'ultimo aggiornamento di questa pagina, se abilitato.
 
 #### `editUrl`
 
-**Tipo:** `URL | undefined`
+**tipo:** `URL | undefined`
 
 Oggetto `URL` per l'indirizzo in cui questa pagina può essere modificata se abilitata.
+
+#### `labels`
+
+**tipo:** `Record<string, string>`
+
+Un oggetto contenente stringhe dell'interfaccia utente localizzate per la pagina corrente. Consulta la guida [“Tradurre l'interfaccia di Starlight”](/it/guides/i18n/#tradurre-linterfaccia-starlight) per un elenco di tutte le chiavi disponibili.
 
 ---
 
@@ -141,7 +148,7 @@ Oggetto `URL` per l'indirizzo in cui questa pagina può essere modificata se abi
 ### Head
 
 Questi componenti vengono renderizzati all'interno dell'elemento `<head>` di ciascuna pagina.
-Dovrebbero includere solo [elementi consentiti all'interno di `<head>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/head#see_also).
+Dovrebbero includere solo [elementi consentiti all'interno di `<head>`](https://developer.mozilla.org/it/docs/Web/HTML/Element/head#see_also).
 
 #### `Head`
 
@@ -151,7 +158,7 @@ Componente renderizzato all'interno di `<head>` di ogni pagina.
 Include tag importanti tra cui `<title>` e `<meta charset="utf-8">`.
 
 Sostituisci questo componente come ultima risorsa.
-Se possibile, preferisci l'opzione di configurazione [`head`](/it/reference/configuration#head) di Starlight.
+Se possibile, preferisci l'opzione di configurazione [`head`](/it/reference/configuration/#head) di Starlight.
 
 #### `ThemeProvider`
 
@@ -227,12 +234,16 @@ L'implementazione predefinita include la logica per il rendering dei loghi defin
 Componente utilizzato per eseguire il rendering dell'interfaccia utente di ricerca di Starlight.
 L'implementazione predefinita include il pulsante nell'intestazione e il codice per visualizzare una schermata di ricerca quando viene cliccata e caricare l'[interfaccia utente di Pagefind](https://pagefind.app/).
 
+Quando [`pagefind`](/it/reference/configuration/#pagefind) è disabilitato, il componente di ricerca predefinito non verrà renderizzato.
+Tuttavia, se si sovrascrive `Search`, il componente personalizzato verrà sempre renderizzato anche se l'opzione di configurazione `pagefind` è `false`.
+Ciò consente di aggiungere un'interfaccia utente per i provider di ricerca alternativi quando si disabilita Pagefind.
+
 #### `SocialIcons`
 
 **Componente standard:** [`SocialIcons.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/SocialIcons.astro)
 
 Componente renderizzato nell'intestazione del sito, inclusi i collegamenti alle icone social.
-L'implementazione predefinita utilizza l'opzione [`social`](/it/reference/configuration#social) nella configurazione di Starlight per eseguire il rendering di icone e collegamenti.
+L'implementazione predefinita utilizza l'opzione [`social`](/it/reference/configuration/#social) nella configurazione di Starlight per eseguire il rendering di icone e collegamenti.
 
 #### `ThemeSelect`
 
@@ -305,7 +316,7 @@ Questi componenti vengono visualizzati nella colonna principale del contenuto de
 **Componente standard:** [`Banner.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Banner.astro)
 
 Componente banner renderizzato nella parte superiore di ogni pagina.
-L'implementazione predefinita utilizza il valore frontmatter [`banner`](/it/reference/frontmatter#banner) della pagina per decidere se renderizzare o meno.
+L'implementazione predefinita utilizza il valore frontmatter [`banner`](/it/reference/frontmatter/#banner) della pagina per decidere se renderizzare o meno.
 
 #### `ContentPanel`
 
@@ -332,7 +343,7 @@ Utilizzato solo su siti multilingue.
 
 **Componente standard:** [`Hero.astro`](https://github.com/withastro/starlight/blob/main/packages/starlight/components/Hero.astro)
 
-Componente renderizzato nella parte superiore della pagina quando [`hero`](/it/reference/frontmatter#hero) è impostato in frontmatter.
+Componente renderizzato nella parte superiore della pagina quando [`hero`](/it/reference/frontmatter/#hero) è impostato in frontmatter.
 L'implementazione predefinita mostra un titolo di grandi dimensioni, uno slogan e collegamenti di invito all'azione insieme a un'immagine facoltativa.
 
 #### `MarkdownContent`
@@ -341,6 +352,8 @@ L'implementazione predefinita mostra un titolo di grandi dimensioni, uno slogan 
 
 Componente renderizzato attorno al contenuto principale di ogni pagina.
 L'implementazione predefinita imposta gli stili di base da applicare al contenuto Markdown.
+
+Anche gli stili del contenuto Markdown sono esposti in `@astrojs/starlight/style/markdown.css` e limitati alla classe CSS `.sl-markdown-content`.
 
 ---
 

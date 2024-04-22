@@ -79,7 +79,7 @@ starlight({
 });
 ```
 
-使用此配置，`/introduction` 页面将具有指向 `https://github.com/withastro/starlight/edit/main/src/docs/introduction.md` 的编辑链接。
+使用此配置，`/introduction` 页面将具有指向 `https://github.com/withastro/starlight/edit/main/src/content/docs/introduction.md` 的编辑链接。
 
 ### `sidebar`
 
@@ -439,6 +439,8 @@ starlight({
 });
 ```
 
+在 `head` 中的条目会直接转换为 HTML 元素，并不会经过 Astro 的 [脚本](https://docs.astro.build/zh-cn/guides/client-side-scripts/#脚本处理) 或 [样式](https://docs.astro.build/zh-cn/guides/styling/#在-astro-进行设计) 处理。如果你需要导入本地资源，如脚本、样式或图片，请[重写 Head 组件](/zh-cn/guides/overriding-components/#复用内置组件)。
+
 #### `HeadConfig`
 
 ```ts
@@ -484,18 +486,18 @@ starlight({
 
 ```js
 starlight({
-  favicon: '/images/favicon.svg'.
-  head: [
-    // 为 Safari 添加 ICO favicon 回退。
-    {
-      tag: 'link',
-      attrs: {
-        rel: 'icon',
-        href:'/images/favicon.ico',
-        sizes: '32x32',
-      },
-    },
-  ],
+	favicon: '/images/favicon.svg',
+	head: [
+		// 为 Safari 添加 ICO favicon 回退。
+		{
+			tag: 'link',
+			attrs: {
+				rel: 'icon',
+				href: '/images/favicon.ico',
+				sizes: '32x32',
+			},
+		},
+	],
 });
 ```
 
@@ -508,6 +510,13 @@ starlight({
 
 默认情况下，每个页面的 `<title>` 都是 `页面标题 | 网站标题`。
 举例，本页面的标题是“配置参考”，本站点的标题是“Starlight”，所以本页面的 `<title>` 是“配置参考 | Starlight”。
+
+### `disable404Route`
+
+**类型：** `boolean`  
+**默认值：** `false`
+
+禁用注入 Starlight 的默认 [404 页面](https://docs.astro.build/zh-cn/core-concepts/astro-pages/#自定义-404-错误页面)。要在项目中使用自定义的 `src/pages/404.astro` 路由，请将此选项设置为 `true`。
 
 ### `components`
 

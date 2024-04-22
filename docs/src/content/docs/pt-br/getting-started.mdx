@@ -7,7 +7,7 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 Starlight é um tema de documentação cheio de funcionalidades construído em cima do framework [Astro](https://astro.build).
 Esse guia o ajudará a iniciar um novo projeto.
-Consulte as [instruções de instalação manual](/pt-br/manual-setup) para adicionar Starlight a um projeto Astro existente.
+Consulte as [instruções de instalação manual](/pt-br/manual-setup/) para adicionar Starlight a um projeto Astro existente.
 
 ## Início Rápido
 
@@ -83,43 +83,9 @@ Abra esta URL para começar a navegar no seu site.
 
 Starlight está pronto para você adicionar novo conteúdo, ou trazer seus arquivos existentes!
 
-#### Formatos de arquivo
+Adicione novas páginas ao seu site criando arquivos Markdown na pasta `src/content/docs/`.
 
-O Starlight suporta a escrita de conteúdo em Markdown e MDX sem nenhuma configuração extra.
-Você pode adicionar suporte para Markdoc instalando a [integração experimental Astro Markdoc](https://docs.astro.build/pt-br/guides/integrations-guide/markdoc/).
-
-#### Adicione páginas
-
-Adicione novas páginas ao seu site criando arquivos `.md` ou `.mdx` em `src/content/docs/`.
-Utilize subdiretórios para organizar seus arquivos, e para criar múltiplos segmentos de caminho.
-
-Por exemplo, a seguinte estrutura de arquivos vai gerar páginas `example.com/ola-mundo` e `example.com/guides/faq`:
-
-import FileTree from '~/components/file-tree.astro';
-
-<FileTree>
-
-- src/
-  - content/
-    - docs/
-      - guides/
-        - faq.md
-      - ola-mundo.md
-
-</FileTree>
-
-#### Frontmatter com segurança de tipos
-
-Todas as páginas do Starlight compartilham um [conjunto comum de propriedades frontmatter](/pt-br/reference/frontmatter/) para controlar como a página aparece:
-
-```md
----
-title: Olá, Mundo!
-description: Essa é uma página no meu site com Starlight
----
-```
-
-Se você esquecer de algo importante, Starlight vai te informar.
+Leia mais sobre roteamento baseado em arquivos e suporte para arquivos MDX e Markdoc no guia de [“Páginas”](/pt-br/guides/pages/).
 
 ### Próximos passos
 
